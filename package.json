@@ -1,6 +1,6 @@
 {
   "name": "ghost",
-  "version": "0.11.12",
+  "version": "0.11.13",
   "description": "Just a blogging platform.",
   "author": "Ghost Foundation",
   "homepage": "http://ghost.org",
@@ -23,7 +23,7 @@
     "test": "grunt validate --verbose"
   },
   "engines": {
-    "node": "^4.5.0 || ^6.9.0"
+    "node": "^6.9.0"
   },
   "dependencies": {
     "amperize": "0.3.5",
