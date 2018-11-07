@@ -25,7 +25,9 @@ describe('Private Blogging', function () {
         var req, res, next;
 
         beforeEach(function () {
-            req = {};
+            req = {
+                query: {}
+            };
             res = {};
             settingsStub = sandbox.stub(settingsCache, 'get');
             next = sandbox.spy();
@@ -223,6 +225,19 @@ describe('Private Blogging', function () {
 
                     privateBlogging.authenticateProtection(req, res, next);
                     res.redirect.called.should.be.true();
+                });
+
+                it('authenticateProtection should redirect to "/" if r param is a full url', function () {
+                    req.body = {password: 'rightpassword'};
+                    req.session = {};
+                    req.query = {
+                        r: encodeURIComponent('http://britney.com')
+                    };
+                    res.redirect = sandbox.spy();
+
+                    privateBlogging.authenticateProtection(req, res, next);
+                    res.redirect.called.should.be.true();
+                    res.redirect.args[0][0].should.be.equal('/');
                 });
 
                 it('filterPrivateRoutes should 404 for /rss/ requests', function () {
